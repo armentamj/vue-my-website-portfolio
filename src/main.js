@@ -6,12 +6,12 @@ import './main.css'
 import { createI18n } from 'vue-i18n'
 
 // Import your translation files
-import en from './locales/en.json'  // adjust path if your folder is different
+import en from './locales/en.json'
 import de from './locales/de.json'
 
 // Create i18n instance with imported messages
 const i18n = createI18n({
-  legacy: false,              // With this you can use I18n() in <script setup>
+  legacy: false,
   locale: 'en',               // default language
   fallbackLocale: 'en',
   globalInjection: true,      // makes $t available globally (handy in templates)
@@ -26,9 +26,6 @@ const savedLanguage = localStorage.getItem('preferredLanguage')
 if (savedLanguage && ['en', 'de'].includes(savedLanguage)) {
   i18n.global.locale.value = savedLanguage
 }
-
-// log for debugging (remove later if you want)
-console.log('Loaded language from storage:', i18n.global.locale.value)
 
 // Font Awesome setup
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
