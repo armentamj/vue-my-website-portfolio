@@ -3,26 +3,15 @@
       <a @click="setMode('light')" :title="$t('mode.light')"><fa icon="sun" class="hell svg" /></a>
       <a @click="setMode('dark')" :title="$t('mode.dark')"><fa icon="moon" class="dunkel svg" /></a>
       <a @click="setMode('relax')" :title="$t('mode.relax')"><fa icon="umbrella-beach" class="entspannen svg" /></a>
-      <a @click="changeLanguage" :title="$t('mode.language_title')">{{ $t('mode.language') }}</a>
+      <a @click="toggleLanguage" :title="$t('mode.language_title')">{{ $t('mode.language') }}</a>
     </div>
 </template>
 <script setup>
 import { useModeStore } from '@/stores/mode.js'
-import { useI18n } from 'vue-i18n'
+import { useLanguageStore } from '@/stores/language';
 
-// Get reactive locale from i18n
-const { locale } = useI18n()
-
-function changeLanguage() {
-  // Toggle between en and de
-  const newLang = locale.value === 'en' ? 'de' : 'en'
-
-  // Apply the change
-  locale.value = newLang
-
-  // Save to localStorage so it persists
-  localStorage.setItem('preferredLanguage', newLang)
-}
+const langStore = useLanguageStore()
+const {toggleLanguage} = langStore
 
 const modeStore = useModeStore()
 const { setMode } = modeStore

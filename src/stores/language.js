@@ -4,16 +4,19 @@ import { useI18n } from 'vue-i18n'
 
 
 export const useLanguageStore = defineStore ( 'language', () => {
-    const {t} = useI18n()
-    const curLanguage = ref(null)
-    const languages = ref(['en', 'de'])
+    const {locale} = useI18n({ useScope: 'global' })
+    const curLanguage = ref('en')
 
-    function setLanguage(lang) {
-        if (!languages.value.includes(lang)) throw new Error(t("This langauge is not supported."))
-        curLanguage.value = lang
+    function toggleLanguage() {
+        if (curLanguage.value === 'en') {
+            curLanguage.value = 'de'
+        } else {
+            curLanguage.value = 'en'
+        }
+        locale.value = curLanguage.value
     }
 
-    return {curLanguage, languages, setLanguage}
+    return {curLanguage, toggleLanguage}
     },
     {persist: true}
 )

@@ -33,126 +33,111 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
-    const test = fetch('/api/weather?search=test')
-    const searchQuery = ref('Miami')
-    const apiKey = '46c9ee8f1274c2734c84066d7b4ffabe'
-    const pexelsApiKey = 'CYJ2yN02aKa6NXFHENRS20ck9BV76yEJYQyWwiWaZt1wYBV1pv6sJfhE'
-    const coordinates = ref(null)
-    const weatherData = ref(null)
-    const cityImage = ref('')
-    const error = ref(null)
-    const loading = ref(null)
-    const celsius = ref(true)
-    const cOrf = ref('C')
-    const fAndC = ref('F')
+const test = fetch('/api/weather?search=test')
+const searchQuery = ref('Miami')
+const apiKey = '46c9ee8f1274c2734c84066d7b4ffabe'
+const pexelsApiKey = 'CYJ2yN02aKa6NXFHENRS20ck9BV76yEJYQyWwiWaZt1wYBV1pv6sJfhE'
+const coordinates = ref(null)
+const weatherData = ref(null)
+const cityImage = ref('')
+const error = ref(null)
+const loading = ref(null)
+const celsius = ref(true)
+const cOrf = ref('C')
+const fAndC = ref('F')
 
-    function getFallbackImage(city) {
-      const seed = city.toLowerCase().replace(/\s+/g, '-') + '-' + Math.floor(Math.random() * 100)
-      return `https://picsum.photos/seed/${seed}/1920/1080`
+function getFallbackImage(city) {
+  const seed = city.toLowerCase().replace(/\s+/g, '-') + '-' + Math.floor(Math.random() * 100)
+  return `https://picsum.photos/seed/${seed}/1920/1080`
+}
+
+async function loadCityBackground(city) {
+  if (!city?.trim()) return
+  try {
+    const query = `${city} skyline`.trim()
+    const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=8&orientation=landscape`
+    const response = await fetch(url, { headers: { Authorization: pexelsApiKey } })
+    if (!response.ok) throw new Error(`Pexels failed: ${response.status}`)
+    const data = await response.json()
+    if (data.photos?.length > 0) {
+      const randomIndex = Math.floor(Math.random() * data.photos.length)
+      cityImage.value = data.photos[randomIndex].src.large2x
+    } else {
+      cityImage.value = getFallbackImage(city)
     }
-
-    async function loadCityBackground(city) {
-      if (!city?.trim()) return
-      try {
-        const query = `${city} skyline`.trim()
-        const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=8&orientation=landscape`
-        const response = await fetch(url, { headers: { Authorization: pexelsApiKey } })
-        if (!response.ok) throw new Error(`Pexels failed: ${response.status}`)
-        const data = await response.json()
-        if (data.photos?.length > 0) {
-          const randomIndex = Math.floor(Math.random() * data.photos.length)
-          cityImage.value = data.photos[randomIndex].src.large2x
-        } else {
-          cityImage.value = getFallbackImage(city)
-        }
-      } catch (error) {
-        console.error('Pexels image load error:', error)
-        cityImage.value = getFallbackImage(city)
-      }
-    }
-
-    async function fetchCoordinates() {
-      const findie = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchQuery.value}&limit=1&appid=${apiKey}`)
-      coordinates.value = await findie.json()
-      console.log('Coordinates:', coordinates.value)
-    }
-
-    async function fetchWeather() {
-      if (!coordinates.value?.length) return
-      const { lat, lon } = coordinates.value[0]
-      const lookUp = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`)
-      weatherData.value = await lookUp.json()
-      console.log('Weather:', weatherData.value)
-      if (!celsius.value) convertToCurrentUnit()
-    }
-
-    function capitalize(str = "") {
-      return str.trim().split(/\s+/g).map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ")
-    }
-
-    function convertToCurrentUnit() {
-      if (!weatherData.value?.main) return
-      const main = weatherData.value.main
-      main.temp = Math.round(main.temp * 1.8 + 32)
-      main.feels_like = Math.round(main.feels_like * 1.8 + 32)
-      main.temp_max = Math.round(main.temp_max * 1.8 + 32)
-      main.temp_min = Math.round(main.temp_min * 1.8 + 32)
-    }
-
-    function cToF() {
-      if (!weatherData.value?.main) return
-      const main = weatherData.value.main
-      if (celsius.value) {
-        // °C → °F
-        main.temp = Math.round(main.temp * 1.8 + 32)
-        main.feels_like = Math.round(main.feels_like * 1.8 + 32)
-        main.temp_max = Math.round(main.temp_max * 1.8 + 32)
-        main.temp_min = Math.round(main.temp_min * 1.8 + 32)
-        cOrf.value = 'F'
-        fAndC.value = 'C'
-      } else {
-        // °F → °C
-        main.temp = Math.round((main.temp - 32) / 1.8)
-        main.feels_like = Math.round((main.feels_like - 32) / 1.8)
-        main.temp_max = Math.round((main.temp_max - 32) / 1.8)
-        main.temp_min = Math.round((main.temp_min - 32) / 1.8)
-        cOrf.value = 'C'
-        fAndC.value = 'F'
-      }
-      celsius.value = !celsius.value
-    }
-
-    async function handleSearch() {
-      await loadCityBackground(searchQuery.value)
-      await fetchCoordinates()
-      await fetchWeather()
-      searchQuery.value = capitalize(searchQuery.value)
-    }
-
-    function getIconUrl(icon) {
-      return `https://openweathermap.org/img/wn/${icon}@2x.png`
-    }
-
-    handleSearch()
-
-    return {
-      searchQuery,
-      weatherData,
-      handleSearch,
-      getIconUrl,
-      cityImage,
-      cToF,
-      celsius,
-      fAndC,
-      cOrf
-    }
+  } catch (error) {
+    console.error('Pexels image load error:', error)
+    cityImage.value = getFallbackImage(city)
   }
 }
+
+async function fetchCoordinates() {
+  const findie = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchQuery.value}&limit=1&appid=${apiKey}`)
+  coordinates.value = await findie.json()
+  console.log('Coordinates:', coordinates.value)
+}
+
+async function fetchWeather() {
+  if (!coordinates.value?.length) return
+  const { lat, lon } = coordinates.value[0]
+  const lookUp = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`)
+  weatherData.value = await lookUp.json()
+  console.log('Weather:', weatherData.value)
+  if (!celsius.value) convertToCurrentUnit()
+}
+
+function capitalize(str = "") {
+  return str.trim().split(/\s+/g).map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ")
+}
+
+function convertToCurrentUnit() {
+  if (!weatherData.value?.main) return
+  const main = weatherData.value.main
+  main.temp = Math.round(main.temp * 1.8 + 32)
+  main.feels_like = Math.round(main.feels_like * 1.8 + 32)
+  main.temp_max = Math.round(main.temp_max * 1.8 + 32)
+  main.temp_min = Math.round(main.temp_min * 1.8 + 32)
+}
+
+function cToF() {
+  if (!weatherData.value?.main) return
+  const main = weatherData.value.main
+  if (celsius.value) {
+    // °C → °F
+    main.temp = Math.round(main.temp * 1.8 + 32)
+    main.feels_like = Math.round(main.feels_like * 1.8 + 32)
+    main.temp_max = Math.round(main.temp_max * 1.8 + 32)
+    main.temp_min = Math.round(main.temp_min * 1.8 + 32)
+    cOrf.value = 'F'
+    fAndC.value = 'C'
+  } else {
+    // °F → °C
+    main.temp = Math.round((main.temp - 32) / 1.8)
+    main.feels_like = Math.round((main.feels_like - 32) / 1.8)
+    main.temp_max = Math.round((main.temp_max - 32) / 1.8)
+    main.temp_min = Math.round((main.temp_min - 32) / 1.8)
+    cOrf.value = 'C'
+    fAndC.value = 'F'
+  }
+  celsius.value = !celsius.value
+}
+
+async function handleSearch() {
+  await loadCityBackground(searchQuery.value)
+  await fetchCoordinates()
+  await fetchWeather()
+  searchQuery.value = capitalize(searchQuery.value)
+}
+
+function getIconUrl(icon) {
+  return `https://openweathermap.org/img/wn/${icon}@2x.png`
+}
+
+handleSearch()
+
 </script>
 
 <style>
