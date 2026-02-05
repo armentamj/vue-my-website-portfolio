@@ -22,12 +22,6 @@ const i18n = createI18n({
   }
 })
 
-// load saved language from localStorage (if any)
-const savedLanguage = localStorage.getItem('preferredLanguage')
-if (savedLanguage && ['en', 'de'].includes(savedLanguage)) {
-  i18n.global.locale.value = savedLanguage
-}
-
 // Font Awesome setup
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
