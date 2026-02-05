@@ -1,0 +1,77 @@
+{
+  "en": {
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "showcase": "Showcase",
+      "contact": "Contact"
+    },
+    "mode": {
+      "light": "Light Mode",
+      "dark": "Dark Mode",
+      "relax": "Relax Mode",
+      "language": "De",
+      "language_title": "Zu Deutsch wechseln"
+    },
+    "home": {
+      "saying": "Coding is awesome!",
+      "job_title": "Full Stack Web Developer",
+      "h2": "Skills",
+      "intro": "Hello, I'm Joel - a passionate Jr. Full Stack Web Developer with a particular love for the creativity of front-end development. Originally from L.A., CA, I was raised in Miami, FL, and have been calling Germany home since 2017. My coding journey began in early 2023, and I'm proud to have recently earned my Full Stack Web Developer certification from Le Wagon Berlin. I’m excited to share my portfolio with you and invite you to explore the different projects and pages on my website. Thank you for visiting, and I hope you enjoy what you see! Have a wonderful day.",
+      "html": "HTML 5 programming language",
+      "css": "CSS 3 programming language",
+      "js": "JavaScript programming language",
+      "ruby": "Ruby programming language",
+      "rails": "Ruby on Rails Framework",
+      "vue": "Vue 3 framework",
+      "docker": "Docker Software Manager",
+      "sql": "SQL programming language",
+      "pinia": "The Pinia Global App State Manager",
+      "garden": "Joel at Miami Beach Botanical Garden"
+    },
+    "showcase": {
+      "switch_to": "Change Temperature Unit",
+      "current_temp": "Current Temp",
+      "loading": "Loading..",
+      "humidity": "Humidity",
+      "precipitation": "Precipitation",
+      "wind": "Wind",
+      "hi_low": "Hi/Low",
+      "feels_like": "Feels Like"
+    },
+    "contact": {
+      "title": "Contact",
+      "contact_message": "Currently available for junior-level roles in frontend, backend, or full-stack web development. I am interested in opportunities that allow me to grow professionally while delivering clean, maintainable code and supporting team objectives. Inquiries regarding employment are welcome—please use email link bellow.",
+      "github": "Joel's GitHub",
+      "linkedin": "Joel's LinkedIn",
+      "email": "Joel's Email"
+    },
+    "about": {
+      "h1": "About Me",
+      "h2one": "I love traveling!",
+      "london": "London Bridge London, England",
+      "madrid": "Madrid, Spain",
+      "mallorca": "Mallorca, Spain",
+      "los_angeles": "Los Angeles, CA, USA",
+      "miami": "Miami Beach, FL, USA",
+      "h2two": "Hobbies",
+      "gym_title": "Gym",
+      "gym_alt": "Fuuny weight lifting gif",
+      "gym_backface": "Weekly, I go to the gym 4 times and I jog.",
+      "travel_title": "Traveling",
+      "travel_alt": "Traveling the world through an airplane window",
+      "travel_backface": "New food, culture, beaches, rivers, mountains. I also love airplanes and flying. What more can I say?",
+      "video_games_title": "Video Games",
+      "video_games_alt": "Picture of a man raging after losing in COD",
+      "video_games_backface":"I love the competition and the difficulty and excitement of FPS.",
+      "cooking_title": "Cooking",
+      "cooking_alt": "Mexican food being prepared",
+      "cooking_backface":"I love a good dish weather mexican, italian, french, or german. Good food is a passion",
+      "beach_title": "Beach Days",
+      "beach_alt": "Relaxing at the beach",
+      "beach_backface": "Relaxing in the sun while floating in warm water is so me!",
+      "next": "Next",
+      "prev": "Previous"
+    }
+  }
+}

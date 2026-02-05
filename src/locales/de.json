@@ -1,0 +1,77 @@
+{
+  "de": {
+    "nav": {
+      "contact": "Kontakt",
+      "showcase": "Showcase",
+      "home": "Startseite",
+      "about": "Über mich"
+    },
+    "mode": {
+      "light": "Light-Modus",
+      "dark": "Dark-Modus",
+      "relax": "Relax-Modus",
+      "language": "En",
+      "language_title": "Switch to english"
+    },
+    "home": {
+      "saying": "Coding ist großartig!",
+      "job_title": "Full-Stack-Webentwickler",
+      "h2": "Fähigkeiten",
+      "intro": "Hallo, ich bin Joel – ein leidenschaftlicher Junior Full-Stack-Webentwickler mit besonderer Begeisterung für die Kreativität der Front-End-Entwicklung. Ursprünglich komme ich aus L.A., CA, bin in Miami, FL aufgewachsen und lebe seit 2017 in Deutschland. Meine Coding-Reise begann Anfang 2023 und ich bin stolz, kürzlich mein Full-Stack-Webentwickler-Zertifikat von Le Wagon Berlin erhalten zu haben. Ich freue mich sehr, mein Portfolio mit Ihnen zu teilen und lade Sie ein, die verschiedenen Projekte und Seiten meiner Website zu erkunden. Vielen Dank für Ihren Besuch",
+      "html": "HTML 5 Programmiersprache",
+      "css": "CSS 3 Programmiersprache",
+      "js": "JavaScript Programmiersprache",
+      "ruby": "Ruby Programmiersprache",
+      "rails": "Ruby on Rails Framework",
+      "vue": "Vue 3 Framework",
+      "docker": "Docker – Software-Container-Manager",
+      "sql": "SQL Programmiersprache",
+      "pinia": "Pinia – globaler App-State-Manager",
+      "garden": "Joel im Miami Beach Botanical Garden"
+    },
+    "showcase": {
+      "switch_to": "Temperatur-Einheit wechseln",
+      "current_temp": "Aktuelle Temperatur",
+      "loading": "Laden...",
+      "humidity": "Luftfeuchtigkeit",
+      "precipitation": "Niederschlag",
+      "wind": "Wind",
+      "hi_low": "Hoch/Tief",
+      "feels_like": "Gefühlt wie"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "contact_message": "Derzeit verfügbar für Junior-Stellen im Frontend-, Backend- oder Full-Stack-Webentwicklungsbereich.\nIch suche nach Möglichkeiten, mich beruflich weiterzuentwickeln, während ich sauberen, wartbaren Code liefere und Teamziele unterstütze.\nAnfragen bezüglich Stellen sind willkommen – bitte nutze das E-Mail-Link unten.",
+      "github": "Joels GitHub",
+      "linkedin": "Joels LinkedIn",
+      "email": "Joels E-Mail"
+    },
+    "about": {
+      "h1": "Über mich",
+      "h2one": "Ich liebe Reisen!",
+      "london": "Londonbrücke, London, England",
+      "madrid": "Madrid, Spanien",
+      "mallorca": "Mallorca, Spanien",
+      "los_angeles": "Los Angeles, CA, USA",
+      "miami": "Miami Beach, FL, USA",
+      "h2two": "Freizeitaktivitäten",
+      "gym_title": "Fitnessstudio",
+      "gym_alt": "Lustiges Gewichtheben-GIF",
+      "gym_backface": "Ich gehe wöchentlich viermal ins Fitnessstudio und gehe joggen.",
+      "travel_title": "Reisen",
+      "travel_alt": "Reisen durch ein Flugzeugfenster",
+      "travel_backface": "Neues Essen, neue Kulturen, Strände, Flüsse, Berge. Ich liebe außerdem Flugzeuge und das Fliegen.",
+      "video_games_title": "Videospiele",
+      "video_games_alt": "Bild eines Mannes, der nach einer Niederlage in COD ausrastet",
+      "video_games_backface":"Ich liebe den Wettbewerb, die Schwierigkeit und die Spannung von FPS-Shootern.",
+      "cooking_title": "Kochen",
+      "cooking_alt": "Zubereitung mexikanischer Speisen",
+      "cooking_backface":"Ich liebe gutes Essen, egal ob mexikanisch, italienisch, französisch oder deutsch. Gutes Essen ist meine Leidenschaft.",
+      "beach_title": "Strand-Tage",
+      "beach_alt": "Entspannen am Strand",
+      "beach_backface": "In der Sonne entspannen, im warmen Wasser schwimmen– das ist genau mein Ding!",
+      "next": "Weiter",
+      "prev": "Zurück"
+    }
+  }
+}

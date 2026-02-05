@@ -1,0 +1,398 @@
+ .currentMode, html,body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+.currentMode {
+  text-align: center;
+}
+
+/* This is for all h1's to be a uniform size in all pages */
+h1 {
+  font-weight: 400;
+  font-size: 70px;
+}
+
+/* This is to pass the font family to all h1-h6 and p tags */
+h1, h2, h3, h4, h5, h6, p, a {
+  font-family: "Titillium Web", sans-serif;
+}
+
+
+
+/* This is for the bg-color and the font color for light mode */
+.light {
+  background-color: white;
+  color: black;
+  transition: background-color 1s ease, color 0.3s ease; 
+}
+
+/* This is for the bg-color and the font color for dark mode */
+.dark {
+  background-color: black;
+  color: white;
+  transition: background-color 1s ease, color 0.3s ease;
+}
+
+/* This is for the bg-color and the font color and bg-image for relax mode */
+.relax {
+  color: #00692c;
+  text-shadow: 1px 1px 1px white, -1px -1px 1px white, -1px 1px 1px white, 1px -1px 1px white; 
+  transition: background-color 1s ease, color 0.3s ease;
+  background-image: url('../src/assets/beach-6517214_1920.jpg');
+  transition: background-color 1s ease, color 0.3s ease;
+}
+
+/* This is to set colors of the bg and font for the main container's direct children light mode */
+.light .main-sub, .light .cntct-shwcs-main-sub {
+  background-color: #04448d36;
+  transition: background-color 1s ease, color 0.3s ease;
+  backdrop-filter: blur(3px);
+}
+
+/* This is to set the colors of the bg and font for the main container's direct children dark mode */
+.dark .main-sub, .dark .cntct-shwcs-main-sub {
+  background-color: #ffffff44;
+  transition: background-color 1s ease, color 0.3s ease;
+  backdrop-filter: blur(3px);
+
+}
+
+/* This is to set the colors of the bg and font for the main container's direct children relax mode */
+.relax .main-sub, .relax .cntct-shwcs-main-sub {
+  background-color: #aaf8ae44;
+  transition: background-color 1s ease, color 0.3s ease;
+  backdrop-filter: blur(3px);
+}
+
+/* The next three classes for the buttons of the About me carousel */
+.relax .button {
+  color: #00692c;
+  border: white solid 2px;
+  text-shadow: 1px 1px 1px white, -1px -1px 1px white, -1px 1px 1px white, 1px -1px 1px white;
+}
+
+.light .button {
+  color: black;
+}
+
+.dark .button {
+  color: white;
+}
+
+/* The next three are for the showcase big city image's city name that is in cursive and slanted 45 degrres in minus. */
+.light .pretty_city_name {
+  color: black;
+  text-shadow: 1px 1px 1px white, -1px -1px 1px white, -1px 1px 1px white, 1px -1px 1px white;
+}
+
+.dark .pretty_city_name {
+  color: black;
+  text-shadow: 1px 1px 1px white, -1px -1px 1px white, -1px 1px 1px white, 1px -1px 1px white;
+}
+
+.relax .pretty_city_name {
+  color: #00692c;
+  text-shadow: 1px 1px 1px white, -1px -1px 1px white, -1px 1px 1px white, 1px -1px 1px white;
+}
+
+/* The next three are for the showcase input field */
+.light .image-container > input:focus {
+  outline-color: black;
+}
+
+.dark .image-container > input:focus {
+  outline-color: black;
+}
+
+.relax .image-container > input:focus {
+  outline-color: #00692c;
+  font: #00692c;
+}
+
+/* The next three classes are for the botton that switches between celsius and Fahrenheit in the showcase view. */
+.light .switch {
+  color: black;
+  border: black 2px solid;
+}
+
+.dark .switch {
+  color: white;
+  border: white 2px solid;
+}
+
+.relax .switch {
+  color: #00692c;
+  text-shadow: 1px 1px 1px white, -1px -1px 1px white, -1px 1px 1px white, 1px -1px 1px white;
+  border: #00692c 2px solid;
+}
+
+/* This is to make sure that the fontawesome icons are the width of there perent container (in inspection mode the icon has an svg element & also a class called .svg) */
+.svg {
+  width: 100%;
+}
+
+/* This is to set the font color for anchor tags in light mode */
+.light a {
+  color: black;
+}
+
+/* This is to set the font color for anchor tags in dark mode */
+.dark a {
+  color: white;
+}
+
+/* This is to set the font color and text shadow for anchor tags in relax mode */
+.relax a {
+  color: #00692c;
+  text-shadow: 1px 1px 1px white, -1px -1px 1px white, -1px 1px 1px white, 1px -1px 1px white;
+}
+
+.relax .svg {
+  filter: drop-shadow(1px 0 0 white) drop-shadow(-1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(0 -1px 0 white);
+}
+
+/* This is for setting only bg color and font color in the main container of the mode bar and nav bar for light mode */
+.light nav, .light .mode {
+  background-color: #04448d36;
+  color: black;
+}
+
+/* This is for setting only bg color and font color in the main container of the mode bar and nav bar for dark mode */
+.dark nav, .dark .mode {
+  background-color: #ffffff44;
+  color: white;
+}
+
+/* This is for setting only bg color and font color in the main container of the mode bar and nav bar for relax mode */
+.relax nav, .relax .mode {
+  background-color: #aaf8ae44;
+}
+
+.relax .i-nav {
+  stroke: white;
+  stroke-width: 3px;
+}
+
+/* This is the hover bg color and transition for the anchor tags of the mode bar and nav bar light mode */
+.light a:hover, .light .button:hover {
+  background-color: #2523bb42;
+  transition: background-color 1s ease, color 0.1s ease;
+}
+
+/* This is the hover bg color and transition for the anchor tags of the mode bar and nav bar dark mode */
+.dark a:hover, .dark .button:hover {
+  background-color: #ffffffb0;
+  transition: background-color 1s ease, color 0.1s ease;
+}
+
+/* This is the hover bg color and transition for the anchor tags of the mode bar and nav bar relax mode */
+.relax a:hover, .relax .button:hover {
+  background-color: #59d15f75;
+  transition: background-color 1s ease, color 0.1s ease;
+}
+
+/* This is for the main container of any page */
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 3%;
+  width: 78%;
+  height: fit-content;
+}
+
+
+/* This is to set sizes and NO Colors */
+.main-sub {
+  width: 35%;
+  margin-top: 9vh;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.336);
+  height: fit-content;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+/* This is for the first child of the main container from the contact and shpwcase view */
+.cntct-shwcs-main-sub {
+  height: fit-content;
+  margin-top: 9vh;
+  padding: 10px;
+  text-align: center;
+  width: 57vw;
+  box-sizing: border-box;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.336);
+  border-radius: 10px;
+}
+
+/* This is to prevent the shpwcase h1 to shove everything to down causing a scroll to be needed. For semitry it is the same for contact.vue's h1 */
+.cntct-shwcs-main-sub h1 {
+  margin-bottom: 0;
+}
+
+
+/* Everything that is a media query is found bellow. */
+@media (max-width: 1800px) {
+  .row-four {
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+}
+
+@media (max-width: 1455px) {
+  .home-ul >.ul-img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .main-content > .home-info {
+    height: auto;
+  }
+
+  .ul-img .pinia {
+    height: auto;
+  }
+}
+
+@media (max-width: 1260px) {
+  nav {
+    flex-direction: row;
+    width: 100vw;
+    height: 4vh;
+    box-shadow: none;
+    flex-direction: row;
+    z-index: 2;
+  }
+  .mode {
+    width: 100vw;
+    height: 4vh;
+    top: 4vh;
+    flex-direction: row;
+    z-index: 2;
+  }
+
+  h1 {
+    font-size: 60px;
+  }
+
+  .home-info > .p-intro {
+    margin: 0;
+  }
+
+  .home-info > h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 1;
+  }
+
+  .main-content {
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding-top: 10vh;
+    flex-wrap: nowrap;
+    z-index: 0;
+    height: fit-content;
+    gap: 2vh;
+  }
+
+  .p-intro {
+    margin: 0;
+  }
+
+  .cntct-shwcs-main-sub {
+    width: 95vw;
+  }
+
+  .cntct-shwcs-main-sub > h2, .cntct-shwcs-main-sub > a {
+    word-break: break-all;          /* breaks literally anywhere */
+  }
+
+  /* This is the div in showcase view with the weather info */
+  .main-content > .sub-two {
+    width: 95vw;
+    margin-top: 0;
+    height: auto;
+  }
+
+  /* This is the div in showcase view with the weather search bar & city bg image */
+  .main-content > .sub-one {
+    width: 95vw;
+    margin-top: 10px;
+    height: 240px;
+  }
+
+  .main-content > .main-sub {
+    width: 95vw;
+    margin-top: 0;
+  }
+
+  .joel-pic {
+    margin-top: 3%;
+  }
+
+  .home-info, .joel-pic {
+    height: auto;
+  }
+
+  .main-content > .sub-one {
+    height: 120px;
+  }
+
+  .name {
+    margin: 20px auto;
+    line-height: 0.8;
+  }
+
+  .info > * {
+    margin-top: 0;
+  }
+
+  .info > :last-child {
+    margin-bottom: 0;
+  }
+
+  .big-icon {
+    width: 45%;
+  }
+
+  .row-four {
+    justify-content: center;
+  }
+
+  .img-container {
+    height: auto;
+    font-size: 50px;
+  }
+
+  .ul-img .pinia {
+    height: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .row-four {
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+  }
+
+  .big-icon > img {
+    width: auto;
+    height: auto;
+  }
+
+  .main-content > .sub-one {
+    height: 150px;
+  }
+
+  .ul-img .pinia {
+    height: auto;
+  }
+}
