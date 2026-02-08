@@ -1,12 +1,12 @@
 networks:
   proxy:
     external: true
-    
+
 services:
-  homepage:
-    image: git.fraley.de/fraley-it/urlaubaer:latest #do later.
-    hostname: homepage
-    container_name: homepage
+  www:
+    build: .
+    hostname: www
+    container_name: www
     networks:
       - proxy
     restart: unless-stopped
