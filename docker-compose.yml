@@ -3,10 +3,10 @@ networks:
     external: true
 
 services:
-  www:
+  homepage:
     build: .
-    hostname: www
-    container_name: www
+    hostname: homepage
+    container_name: homepage
     networks:
       - proxy
     restart: unless-stopped
