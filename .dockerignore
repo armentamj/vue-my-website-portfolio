@@ -1,0 +1,11 @@
+docker-compose.yml
+node_modules
+.editorconfig
+.gitignore
+.git
+README.md
+test-results
+playwright-report
+blob-report
+playwright
+tests

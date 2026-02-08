@@ -1,0 +1,14 @@
+networks:
+  proxy:
+    external: true
+    
+services:
+  homepage:
+    image: git.fraley.de/fraley-it/urlaubaer:latest #do later.
+    hostname: homepage
+    container_name: homepage
+    networks:
+      - proxy
+    restart: unless-stopped
+    volumes:
+      - ./pocketbase/pb_data:/pb/pb_data
