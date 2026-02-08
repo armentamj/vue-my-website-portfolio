@@ -37,7 +37,7 @@ COPY ./pocketbase/pb_migrations /pb/pb_migrations
 RUN mkdir /pb/pb_hooks
 COPY ./pocketbase/pb_hooks /pb/pb_hooks
 
-COPY ./dockerfiles/entrypoint.sh /pb/
+COPY entrypoint.sh /pb/
 RUN chmod +x /pb/entrypoint.sh
 
 EXPOSE 8090
