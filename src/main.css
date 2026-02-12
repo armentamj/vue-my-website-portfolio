@@ -75,10 +75,12 @@ h1, h2, h3, h4, h5, h6, p, a {
 
 .light .button {
   color: black;
+  border: white solid 2px;
 }
 
 .dark .button {
   color: white;
+  border: white solid 2px;
 }
 
 /* The next three are for the showcase big city image's city name that is in cursive and slanted 45 degrres in minus. */
@@ -193,7 +195,7 @@ h1, h2, h3, h4, h5, h6, p, a {
   transition: background-color 1s ease, color 0.1s ease;
 }
 
-/* This is for the main container of any page */
+/* This is for the main(biggest) container of every page */
 .main-content {
   display: flex;
   justify-content: center;
@@ -256,6 +258,10 @@ h1, h2, h3, h4, h5, h6, p, a {
 
   .ul-img .pinia {
     height: auto;
+  }
+  
+  .pretty_city_name {
+    display: none;
   }
 }
 
