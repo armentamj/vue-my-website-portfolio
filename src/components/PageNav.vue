@@ -1,18 +1,18 @@
 <template>
   <nav>
-    <router-link to="/" :title="$t('nav.nav_home')">
+    <router-link to="/" :title="$t('nav.home')">
       <fa icon="house" class="svg" />
     </router-link>
 
-    <router-link to="/Showcase" :title="$t('nav.nav_showcase')">
+    <router-link to="/Showcase" :title="$t('nav.showcase')">
       <fa icon="play" class="svg" />
     </router-link>
 
-    <router-link to="/Contact" :title="$t('nav.nav_contact')">
+    <router-link to="/Contact" :title="$t('nav.contact')">
       <fa icon="envelope" class="svg" />
     </router-link>
 
-    <router-link to="/About" :title="$t('nav.nav_about')">
+    <router-link to="/About" :title="$t('nav.about')">
       <fa icon="info" class="svg" />
     </router-link>
   </nav>

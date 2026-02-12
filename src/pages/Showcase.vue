@@ -27,7 +27,7 @@
     <div class="main-sub sub-one">
       <div class="img-container" :style="{ backgroundImage: `url(${cityImage})` }">
         <p class="pretty_city_name">{{searchQuery}}</p>
-        <input type="text" :placeholder="$t('showcase.search_placeholder')" v-model="searchQuery" @keyup.enter="handleSearch">
+        <input type="text" v-model="searchQuery" @keyup.enter="handleSearch">
       </div>
     </div>
   </div>
@@ -143,14 +143,16 @@ handleSearch()
 <style>
   .img-container {
     border-radius: 3px;
-    width: calc(100% - 20px);
-    height: calc(100% - 20px);
+    width: 100%;
+    height: 100%;
     background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: end;
     align-content: center;
   }
+
+
   .main-content > .sub-two {
     height: 90vh;
     box-sizing: border-box;
@@ -159,12 +161,15 @@ handleSearch()
     justify-content: space-between;
     align-content: center;
   }
+
   .main-content > .sub-one {
     display: flex;
     justify-content: center;
     align-content: center;
     height: 90vh;
+    box-sizing: border-box;
   }
+
   .row-one {
     text-align: center;
   }
