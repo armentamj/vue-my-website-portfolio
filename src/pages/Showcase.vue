@@ -3,7 +3,7 @@
     <div class="main-sub sub-two">
       <div class="row-one">
         <button class="switch" :title="$t('showcase.switch_to')" @click="cToF">{{ fAndC }}</button>
-        <p class="name">{{searchQuery}}</p>
+        <p class="name">{{city}}</p>
       </div>
       <div class="row-two">
         <p>{{ $t('showcase.current_temp') }}</p>
@@ -26,8 +26,7 @@
     </div>
     <div class="main-sub sub-one">
       <div class="img-container" :style="{ backgroundImage: `url(${cityImage})` }">
-        <p class="pretty_city_name">{{searchQuery}}</p>
-        <input type="text" v-model="searchQuery" @keyup.enter="handleSearch">
+        <input type="text" :placeholder="$t('about.place_holder')" v-model="city">
       </div>
     </div>
   </div>
@@ -35,6 +34,10 @@
 
 <script setup>
 import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useLocationStore } from '@/stores/location'
+
+const { city, location } = storeToRefs(useLocationStore())
 
 const test = fetch('/api/weather?search=test')
 const searchQuery = ref('Miami')
@@ -81,8 +84,8 @@ async function fetchCoordinates() {
 }
 
 async function fetchWeather() {
-  if (!coordinates.value?.length) return
-  const { lat, lon } = coordinates.value[0]
+  if (!location.value?.length) return
+  const { lat, lon } = location.value[0]
   const lookUp = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`)
   weatherData.value = await lookUp.json()
   console.log('Weather:', weatherData.value)
@@ -158,7 +161,7 @@ handleSearch()
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
     align-content: center;
   }
 
@@ -191,7 +194,7 @@ handleSearch()
 
   .row-one > .name {
     font-size: 50px;
-    margin-bottom: 0;
+    margin: 0;
     height: 76px;
   }
   .row-two {
@@ -206,7 +209,7 @@ handleSearch()
     text-align: center;
   }
   .row-three > h2 {
-    font-size: clamp( 70px, 7vw, 130px);
+    font-size: 60px;
     margin: 0;
   }
   .row-four {
@@ -219,25 +222,17 @@ handleSearch()
     grid-template-columns: 1fr;
   }
   .info > p {
-    font-size: clamp( 25px, 1.25vw, 2vw);
+    font-size: 20px;
+    margin: 10px 0;
   }
   .big-icon {
-    width: 60%;
-    height: auto;
+    width: fit-content;
+    height: fit-content;
   }
   .big-icon > img {
-    width: clamp(100px, 250px, 350px);
-    height: clamp(100px, 250px, 350px);
+    width: 125px;
+    height: 125px;
     object-fit: cover;
-  }
-
-  .pretty_city_name {
-    position: absolute;
-    left: 25px;
-    top: 25px;
-    transform: rotateZ(-45deg);
-    font-family: "Yellowtail", cursive;
-    font-size: 50px;
   }
 
   .img-container > input {

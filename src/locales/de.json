@@ -71,7 +71,8 @@
       "beach_alt": "Entspannen am Strand",
       "beach_backface": "In der Sonne entspannen, im warmen Wasser schwimmen– das ist genau mein Ding!",
       "next": "Weiter",
-      "prev": "Zurück"
+      "prev": "Zurück",
+      "place_holder": "Stadtname"
     },
     "This langauge is not supported.": "Die gevehlte Sprache ist nicht unterstust."
   }
