@@ -71,7 +71,8 @@
       "beach_alt": "Relaxing at the beach",
       "beach_backface": "Relaxing in the sun while floating in warm water is so me!",
       "next": "Next",
-      "prev": "Previous"
+      "prev": "Previous",
+      "place_holder": "Name of City"
     },
     "This langauge is not supported.": "This langauge is not supported."
   }
