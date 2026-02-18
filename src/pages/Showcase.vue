@@ -1,9 +1,9 @@
 <template>
-  <div class="main-content">
+  <div v-if="weatherData" class="main-content">
     <div class="main-sub sub-two">
       <div class="row-one">
         <button class="switch" :title="$t('showcase.switch_to')" @click="cToF">{{ fAndC }}</button>
-        <p class="name">{{weatherData.name}}</p>
+        <p class="name">{{weatherData.name}}, {{ weatherData.sys.country }}</p>
       </div>
       <div class="row-two">
         <p>{{ $t('showcase.current_temp') }}</p>
@@ -67,137 +67,140 @@
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useLocationStore } from '@/stores/location'
+import { useWeatherStore } from '@/stores/weather'
+import { useImageStore } from '@/stores/image'
 
-const { city, location } = storeToRefs(useLocationStore())
+const locationStore = useLocationStore()
+const { city, location } = storeToRefs(locationStore)
+const weatherStore = useWeatherStore()
+const { weatherData } = storeToRefs(weatherStore)
+const { forecast } = storeToRefs(weatherStore)
+const imageStore = useImageStore()
+const { cityImage } = storeToRefs(imageStore)
 
-const test = fetch('/api/weather?search=test')
+if (city.value === '') city.value = 'Miami'
+
 const searchQuery = ref('Miami')
 const apiKey = '46c9ee8f1274c2734c84066d7b4ffabe'
 const pexelsApiKey = 'CYJ2yN02aKa6NXFHENRS20ck9BV76yEJYQyWwiWaZt1wYBV1pv6sJfhE'
 const coordinates = ref(null)
-const weatherData = ref(null)
-const cityImage = ref('')
-const forecast = ref(null)
 const forecastError = ref(null)
-const loading = ref(null)
 const celsius = ref(true)
 const cOrf = ref('C')
 const fAndC = ref('F')
-const foreList = ref(null)
 
 function getFallbackImage(city) {
   const seed = city.toLowerCase().replace(/\s+/g, '-') + '-' + Math.floor(Math.random() * 100)
   return `https://picsum.photos/seed/${seed}/1920/1080`
 }
 
-async function loadCityBackground(city) {
-  if (!city?.trim()) return
-  try {
-    const query = `${city} skyline`.trim()
-    const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=8&orientation=landscape`
-    const response = await fetch(url, { headers: { Authorization: pexelsApiKey } })
-    if (!response.ok) throw new Error(`Pexels failed: ${response.status}`)
-    const data = await response.json()
-    if (data.photos?.length > 0) {
-      const randomIndex = Math.floor(Math.random() * data.photos.length)
-      cityImage.value = data.photos[randomIndex].src.large2x
-    } else {
-      cityImage.value = getFallbackImage(city)
-    }
-  } catch (error) {
-    console.error('Pexels image load error:', error)
-    cityImage.value = getFallbackImage(city)
-  }
-}
+// async function loadCityBackground(city) {
+//   if (!city?.trim()) return
+//   try {
+//     const query = `${city} skyline`.trim()
+//     const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=8&orientation=landscape`
+//     const response = await fetch(url, { headers: { Authorization: pexelsApiKey } })
+//     if (!response.ok) throw new Error(`Pexels failed: ${response.status}`)
+//     const data = await response.json()
+//     if (data.photos?.length > 0) {
+//       const randomIndex = Math.floor(Math.random() * data.photos.length)
+//       cityImage.value = data.photos[randomIndex].src.large2x
+//     } else {
+//       cityImage.value = getFallbackImage(city)
+//     }
+//   } catch (error) {
+//     console.error('Pexels image load error:', error)
+//     cityImage.value = getFallbackImage(city)
+//   }
+// }
 
 
-async function fetchCoordinates() {
-  const findie = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchQuery.value}&limit=1&appid=${apiKey}`)
-  coordinates.value = await findie.json()
-  console.log('Coordinates:', coordinates.value)
-}
+// async function fetchCoordinates() {
+//   const findie = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchQuery.value}&limit=1&appid=${apiKey}`)
+//   coordinates.value = await findie.json()
+//   console.log('Coordinates:', coordinates.value)
+// }
 
-async function fetchWeather() {
-  if (!location.value?.length) return
-  const { lat, lon } = location.value[0]
-  const lookUp = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`)
-  weatherData.value = await lookUp.json()
-  console.log("weather api loaded:", weatherData.value)
-}
+// async function fetchWeather() {
+//   if (!location.value?.length) return
+//   const { lat, lon } = location.value[0]
+//   const lookUp = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`)
+//   weatherData.value = await lookUp.json()
+//   console.log("weather api loaded:", weatherData.value)
+// }
 
-async function fetchFiveDay() {
-  if (!coordinates.value?.[0]?.lat || !coordinates.value?.[0]?.lon) {
-    console.warn("No valid coordinates available for forecast fetch");
-    forecastError.value = "Missing coordinates";
-    return;
-  }
+// async function fetchFiveDay() {
+//   if (!coordinates.value?.[0]?.lat || !coordinates.value?.[0]?.lon) {
+//     console.warn("Coordinates not available for forecast fetch");
+//     forecastError.value = "Missing coordinates";
+//     return;
+//   }
 
-  const  lat = coordinates.value[0].lat;
-  const  lon = coordinates.value[0].lon;
+//   const  lat = coordinates.value[0].lat;
+//   const  lon = coordinates.value[0].lon;
 
-  try {
-    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+//   try {
+//     const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
     
-    const response = await fetch(url);
+//     const response = await fetch(url);
     
-    if (!response.ok) {
-      throw new Error(`Forecast API failed: ${response.status} ${response.statusText}`);
-    }
+//     if (!response.ok) {
+//       throw new Error(`Forecast API failed: ${response.status} ${response.statusText}`);
+//     }
     
-    const data = await response.json();
-    forecast.value = data;
-    console.log("5-day forecast loaded:", forecast.value);
-  } catch (err) {
-    forecastError.value = err.message || 'Failed to load 5-day forecast';
-    console.error("Forecast error:", err);
-  }
-}
+//     const data = await response.json();
+//     forecast.value = data;
+//     console.log("5-day forecast loaded:", forecast.value);
+//   } catch (err) {
+//     forecastError.value = err.message || 'Failed to load 5-day forecast';
+//     console.error("Forecast error:", err);
+//   }
+// }
 
-function capitalize(str = "") {
-  return str.trim().split(/\s+/g).map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ")
-}
+// function capitalize(str = "") {
+//   return str.trim().split(/\s+/g).map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ")
+// }
 
 function cToF() {
-  if (!weatherData.value?.main || !forecast) return
+  if (!weatherData.value?.main) return
   const main = weatherData.value.main
-  foreList.value = forecast.value.list
-  console.log("foreList loaded", foreList)
+  console.log("forecast loaded", forecast)
   if (celsius.value) {
     // °C to °F
     main.temp = Math.round(main.temp * 1.8 + 32)
     main.feels_like = Math.round(main.feels_like * 1.8 + 32)
     main.temp_max = Math.round(main.temp_max * 1.8 + 32)
     main.temp_min = Math.round(main.temp_min * 1.8 + 32)
+    // forecast.value[2].main.temp_min = Math.round(forecast.value.list[2].main.temp_min * 1.8 + 32)
+    // forecast[6].main.temp_max = Math.round(forecast.list[6].main.temp_max * 1.8 + 32)
+    // forecast[10].main.temp_min = Math.round(forecast.list[10].main.temp_min * 1.8 + 32)
+    // forecast[14].main.temp_max = Math.round(forecast.list[14].main.temp_max * 1.8 + 32)
+    // forecast[18].main.temp_min = Math.round(forecast.list[18].main.temp_min * 1.8 + 32)
+    // forecast[22].main.temp_max = Math.round(forecast.list[22].main.temp_max * 1.8 + 32)
+    // forecast[26].main.temp_min = Math.round(forecast.list[26].main.temp_min * 1.8 + 32)
+    // forecast[30].main.temp_max = Math.round(forecast.list[30].main.temp_max * 1.8 + 32)
+    // forecast[34].main.temp_min = Math.round(forecast.list[34].main.temp_min * 1.8 + 32)
+    // forecast[38].main.temp_max = Math.round(forecast.list[38].main.temp_max * 1.8 + 32)
     cOrf.value = 'F'
     fAndC.value = 'C'
-    forecast[2].main.temp_min = Math.round(foreList.value.list[2].main.temp_min * 1.8 + 32)
-    // foreList[6].main.temp_max = Math.round(forecast.list[6].main.temp_max * 1.8 + 32)
-    // foreList[10].main.temp_min = Math.round(forecast.list[10].main.temp_min * 1.8 + 32)
-    // foreList[14].main.temp_max = Math.round(forecast.list[14].main.temp_max * 1.8 + 32)
-    // foreList[18].main.temp_min = Math.round(forecast.list[18].main.temp_min * 1.8 + 32)
-    // foreList[22].main.temp_max = Math.round(forecast.list[22].main.temp_max * 1.8 + 32)
-    // foreList[26].main.temp_min = Math.round(forecast.list[26].main.temp_min * 1.8 + 32)
-    // foreList[30].main.temp_max = Math.round(forecast.list[30].main.temp_max * 1.8 + 32)
-    // foreList[34].main.temp_min = Math.round(forecast.list[34].main.temp_min * 1.8 + 32)
-    // foreList[38].main.temp_max = Math.round(forecast.list[38].main.temp_max * 1.8 + 32)
   } else {
     // °F to °C
     main.temp = Math.round((main.temp - 32) / 1.8)
     main.feels_like = Math.round((main.feels_like - 32) / 1.8)
     main.temp_max = Math.round((main.temp_max - 32) / 1.8)
     main.temp_min = Math.round((main.temp_min - 32) / 1.8)
+    // forecast.value[2].main.temp_min = Math.round((forecast.value[2].main.temp_min - 32) / 1.8)
+    // forecast.value[6].main.temp_max = Math.round((forecast.list[6].main.temp_max - 32) / 1.8)
+    // forecast.value[10].main.temp_min = Math.round((forecast.list[10].main.temp_min - 32) / 1.8)
+    // forecast.value[14].main.temp_max = Math.round((forecast.list[14].main.temp_max - 32) / 1.8)
+    // forecast.value[18].main.temp_min = Math.round((forecast.list[18].main.temp_min - 32) / 1.8)
+    // forecast.value[22].main.temp_max = Math.round((forecast.list[22].main.temp_max - 32) / 1.8)
+    // forecast.value[26].main.temp_min = Math.round((forecast.list[26].main.temp_min - 32) / 1.8)
+    // forecast.value[30].main.temp_max = Math.round((forecast.list[30].main.temp_max - 32) / 1.8)
+    // forecast.value[34].main.temp_min = Math.round((forecast.list[34].main.temp_min - 32) / 1.8)
+    // forecast.value[38].main.temp_max = Math.round((forecast.list[38].main.temp_max - 32) / 1.8)
     cOrf.value = 'C'
     fAndC.value = 'F'
-    forecast[2].main.temp_min = Math.round((foreList.value[2].main.temp_min - 32) / 1.8)
-    // foreList.value[6].main.temp_max = Math.round((forecast.list[6].main.temp_max - 32) / 1.8)
-    // foreList.value[10].main.temp_min = Math.round((forecast.list[10].main.temp_min - 32) / 1.8)
-    // foreList.value[14].main.temp_max = Math.round((forecast.list[14].main.temp_max - 32) / 1.8)
-    // foreList.value[18].main.temp_min = Math.round((forecast.list[18].main.temp_min - 32) / 1.8)
-    // foreList.value[22].main.temp_max = Math.round((forecast.list[22].main.temp_max - 32) / 1.8)
-    // foreList.value[26].main.temp_min = Math.round((forecast.list[26].main.temp_min - 32) / 1.8)
-    // foreList.value[30].main.temp_max = Math.round((forecast.list[30].main.temp_max - 32) / 1.8)
-    // foreList.value[34].main.temp_min = Math.round((forecast.list[34].main.temp_min - 32) / 1.8)
-    // foreList.value[38].main.temp_max = Math.round((forecast.list[38].main.temp_max - 32) / 1.8)
   }
   celsius.value = !celsius.value
 }
@@ -212,11 +215,11 @@ function formatMonthDay(dt) {
 }
 
 async function handleSearch() {
-  await loadCityBackground(searchQuery.value)
-  await fetchCoordinates()
-  await fetchWeather()
-  await fetchFiveDay()
-  searchQuery.value = capitalize(searchQuery.value)
+  // await loadCityBackground(searchQuery.value)
+  // await fetchCoordinates()
+  // await fetchWeather()
+  // await fetchFiveDay()
+  // searchQuery.value = capitalize(searchQuery.value)
 }
 
 function getIconUrl(icon) {
@@ -329,14 +332,20 @@ handleSearch()
     grid-template-columns: repeat(5, 1fr);
     border: 1px solid white;
     border-radius: 5px;
+    margin-top: 10px;
   }
 
   .row-five-loading {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
-    border: 1px solid white;
     border-radius: 5px;
+    margin-top: 10px;
+  }
+
+  .row-five-loading > a {
+    font-size: 32px;
+    text-align: center;
   }
 
   .days {
