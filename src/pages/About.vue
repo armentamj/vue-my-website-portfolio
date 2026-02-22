@@ -282,7 +282,7 @@ import { ref } from 'vue'
   height: fit-content;
   font-size: 25px;
   border-radius: 4px;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.336);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.300);
   border: none;
   transition: background-color 1s ease, color 0.3s ease;
   cursor: pointer;

@@ -29,7 +29,7 @@ nav {
   left: 0;
   width: 47px;
   text-align: center;
-  box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.3);
 }
 
 .svg-inline--fa {

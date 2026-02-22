@@ -28,7 +28,7 @@ const { setMode } = modeStore
   top: 0;
   right: 0;
   width: 47px;
-  box-shadow: -8px 8px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: -8px 8px 15px rgba(0, 0, 0, 0.300);
 }
 
 /* This is for the children of the mode bar ie the anchor tags. */

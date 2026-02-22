@@ -3,9 +3,9 @@
 import { ref, watch } from 'vue'
 import { defineStore, storeToRefs } from 'pinia'
 import { useLocationStore } from '@/stores/location'   // ← adjust path if your file is named differently (e.g. useLocation.js)
+let debounceId = null
 
 export const useImageStore = defineStore('image', () => {
-  const pexelsApiKey = 'CYJ2yN02aKa6NXFHENRS20ck9BV76yEJYQyWwiWaZt1wYBV1pv6sJfhE'
   const cityImage = ref('')
   const isLoading = ref(false)
   const error = ref(null)
@@ -14,13 +14,18 @@ export const useImageStore = defineStore('image', () => {
   const locationStore = useLocationStore()
   const { city } = storeToRefs(locationStore)
 
-  let debounceTimer = null
+  watch(city, () => {
+    clearTimeout(debounceId)
+    if(city.value === "") return
 
-  watch(city, (newCity) => {
-    clearTimeout(debounceTimer)
+    debounceId = setTimeout(loadData, 250)
+  })
 
-    debounceTimer = setTimeout(async () => {
-     const trimmed = (newCity ?? '').trim()
+
+  const loadData = async function() {
+    if (isLoading.value) return
+
+     const trimmed = (city.value ?? '').trim()
 
       if (!trimmed) {
         cityImage.value = ''
@@ -29,18 +34,15 @@ export const useImageStore = defineStore('image', () => {
         return
       }
       
-      if (isLoading.value) return
 
       isLoading.value = true
       error.value = null
 
       try {
-        const query = `${newCity.trim()} skyline landscape`.trim()
-        const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=10&orientation=landscape`
+        const query = `${city.value.trim()} skyline landscape`.trim()
+        const url = `/pb/image/${query}`
 
-        const res = await fetch(url, {
-          headers: { Authorization: pexelsApiKey }
-        })
+        const res = await fetch(url)
 
         if (!res.ok) throw new Error(`Pexels HTTP ${res.status}`)
 
@@ -56,12 +58,14 @@ export const useImageStore = defineStore('image', () => {
         console.warn('Pexels image load error:', err)
         error.value = err.message
 
-        cityImage.value = `https://source.unsplash.com/random/1920x1080?${encodeURIComponent(newCity)},skyline`
+        cityImage.value = `https://source.unsplash.com/random/1920x1080?${encodeURIComponent(city.value)},skyline`
       } finally {
         isLoading.value = false
       }
-    }, 500)
-  }, { immediate: true })
+
+  }
+
+  if (!cityImage.value && city.value && !isLoading.value) loadData() 
 
   return { cityImage, isLoading, error }
 }, {

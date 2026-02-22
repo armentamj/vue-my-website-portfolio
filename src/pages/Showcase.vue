@@ -71,7 +71,7 @@ import { useWeatherStore } from '@/stores/weather'
 import { useImageStore } from '@/stores/image'
 
 const locationStore = useLocationStore()
-const { city, location } = storeToRefs(locationStore)
+const { city } = storeToRefs(locationStore)
 const weatherStore = useWeatherStore()
 const { weatherData } = storeToRefs(weatherStore)
 const { forecast } = storeToRefs(weatherStore)
@@ -276,11 +276,11 @@ handleSearch()
     border-radius: 50%;
     cursor: pointer;
     background-color: transparent;
-    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.300);
   }
 
   .row-one > .name {
-    font-size: 40px;
+    font-size: 25px;
     margin-top: 0;
     height: 76px;
   }
