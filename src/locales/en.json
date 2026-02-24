@@ -74,6 +74,24 @@
       "prev": "Previous",
       "place_holder": "Name of City"
     },
+    "directions": {
+    "N": "N",
+    "NNE": "NNE",
+    "NE": "NE",
+    "ENE": "ENE",
+    "E": "E",
+    "ESE": "ESE",
+    "SE": "SE",
+    "SSE": "SSE",
+    "S": "S",
+    "SSW": "SSW",
+    "SW": "SW",
+    "WSW": "WSW",
+    "W": "W",
+    "WNW": "WNW",
+    "NW": "NW",
+    "NNW": "NNW"
+  },
     "This langauge is not supported.": "This langauge is not supported."
   }
 }

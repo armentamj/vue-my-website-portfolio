@@ -16,39 +16,39 @@
           <img :src="weatherData?getIconUrl(weatherData.weather[0].icon):'../assets/loading.gif'" :alt="weatherData?weatherData.weather[0].description:$t('showcase.loading')">
         </div>
         <div class="info">
-          <p>{{ $t('showcase.humidity') }}: {{weatherData?weatherData.main.humidity+'%':$t('showcase.loading')}}</p>
-          <p>{{ $t('showcase.precipitation') }}: {{ weatherData ? Math.round(weatherData.rain?.['1h'] || 0) + ' mm' : $t('showcase.loading') }}</p>
-          <p>{{ $t('showcase.wind') }}: {{weatherData?weatherData.wind.deg+'° / '+Math.round(weatherData.wind.speed)+' kph':$t('showcase.loading')}}</p>
-          <p>{{ $t('showcase.hi_low') }}: {{weatherData?Math.round(weatherData.main.temp_max)+'°'+cOrf+' / '+Math.round(weatherData.main.temp_min)+'°'+cOrf:$t('showcase.loading')}}</p>
           <p>{{ $t('showcase.feels_like') }}: {{weatherData?Math.round(weatherData.main.feels_like)+'°'+cOrf:$t('showcase.loading')}}</p>
+          <p>{{ $t('showcase.humidity') }}: {{weatherData?weatherData.main.humidity+'%':$t('showcase.loading')}}</p>
+          <p>{{ $t('showcase.precipitation') }}: {{ weatherData ? (weatherData.rain?.['1h'] ?? weatherData.snow?.['1h'] ?? 0) + ' ' + rainUnit : $t('showcase.loading') }}</p>
+          <p>{{ $t('showcase.wind') }}: {{ weatherData ? $t(`directions.${getWindDirection(weatherData.wind.deg)}`) + ' / ' + Math.round(weatherData.wind.speed) + ' ' + standardMetric : $t('showcase.loading') }}</p>
+          <p>{{ $t('showcase.hi_low') }}: {{weatherData?Math.round(weatherData.main.temp_max)+'°'+cOrf+' / '+Math.round(weatherData.main.temp_min)+'°'+cOrf:$t('showcase.loading')}}</p>
+          <p>{{ formatHour(weatherData.sys.sunrise) }} - {{ formatHour(weatherData.sys.sunset) }} UTC</p>
         </div>
       </div>
       <div class="row-five" v-if="forecast?.list?.length">
-        <div class="days">
-          
-          <p class="date">{{ formatMonthDay(forecast.list[6].dt) }}</p>
-          <img :src="`https://openweathermap.org/img/wn/${forecast.list[6].weather[0].icon}@2x.png`" alt="Weather icon" class="small-weather-icon">
-          <p class="s-min-max">{{ forecast?.list?.[6] ? Math.round(forecast.list[6].main.temp_max)+'°'+cOrf+' / '+Math.round(forecast.list[2].main.temp_min)+'°'+cOrf : $t('showcase.loading') }}</p>
+        <div class="days"> 
+          <p class="date">{{ formatMonthDay(weatherData?.dt) }}</p>
+          <img :src="weatherData?.weather?.[0]?.icon ? getIconUrl(weatherData.weather[0].icon) : '../assets/loading.gif'" alt="Weather icon" class="small-weather-icon">
+          <p class="s-min-max">{{ weatherData?.main ? Math.round(weatherData.main.temp_max)+'°'+cOrf+' / '+Math.round(weatherData.main.temp_min)+'°'+cOrf : $t('showcase.loading') }}</p>
         </div>
         <div class="days">
-          <p class="date">{{ formatMonthDay(forecast.list[14].dt) }}</p>
-          <img :src="`https://openweathermap.org/img/wn/${forecast.list[14].weather[0].icon}@2x.png`" alt="Weather icon" class="small-weather-icon">
-          <p class="s-min-max">{{ forecast?.list?.[14] ? Math.round(forecast.list[14].main.temp_max)+'°'+cOrf+' / '+Math.round(forecast.list[10].main.temp_min)+'°'+cOrf : $t('showcase.loading') }}</p>
+          <p class="date">{{ formatMonthDay(dayTwo?.items?.[0]?.dt) }}</p>
+          <img :src="dayTwo?.items?.[0]?.weather?.[0]?.icon ? getIconUrl(dayTwo.items[0].weather[0].icon) : '../assets/loading.gif'" alt="Weather icon" class="small-weather-icon">
+          <p class="s-min-max">{{ dayTwo?.min?.length ? Math.round(dayTwo.max[dayTwo.max.length-1])+'°'+cOrf+' / '+Math.round(dayTwo.min[0])+'°'+cOrf : $t('showcase.loading') }}</p>
         </div>
         <div class="days">
-          <p class="date">{{ formatMonthDay(forecast.list[22].dt) }}</p>
-          <img :src="`https://openweathermap.org/img/wn/${forecast.list[22].weather[0].icon}@2x.png`" alt="Weather icon" class="small-weather-icon">
-          <p class="s-min-max">{{ forecast?.list?.[22] ? Math.round(forecast.list[22].main.temp_max)+'°'+cOrf+' / '+Math.round(forecast.list[18].main.temp_min)+'°'+cOrf : $t('showcase.loading') }}</p>
+          <p class="date">{{ formatMonthDay(dayThree?.items?.[0]?.dt) }}</p>
+          <img :src="dayThree?.items?.[0]?.weather?.[0]?.icon ? getIconUrl(dayThree.items[0].weather[0].icon) : '../assets/loading.gif'" alt="Weather icon" class="small-weather-icon">
+          <p class="s-min-max">{{ dayThree?.min?.length ? Math.round(dayThree.max[dayThree.max.length-1])+'°'+cOrf+' / '+Math.round(dayThree.min[0])+'°'+cOrf : $t('showcase.loading') }}</p>
         </div>
         <div class="days">
-          <p class="date">{{ formatMonthDay(forecast.list[30].dt) }}</p>
-          <img :src="`https://openweathermap.org/img/wn/${forecast.list[30].weather[0].icon}@2x.png`" alt="Weather icon" class="small-weather-icon">
-          <p class="s-min-max">{{ forecast?.list?.[30] ? Math.round(forecast.list[30].main.temp_max)+'°'+cOrf+' / '+Math.round(forecast.list[26].main.temp_min)+'°'+cOrf : $t('showcase.loading') }}</p>
+          <p class="date">{{ formatMonthDay(dayFour?.items?.[0]?.dt) }}</p>
+          <img :src="dayFour?.items?.[0]?.weather?.[0]?.icon ? getIconUrl(dayFour.items[0].weather[0].icon) : '../assets/loading.gif'" alt="Weather icon" class="small-weather-icon">
+          <p class="s-min-max">{{ dayFour?.min?.length ? Math.round(dayFour.max[dayFour.max.length-1])+'°'+cOrf+' / '+Math.round(dayFour.min[0])+'°'+cOrf : $t('showcase.loading') }}</p>
         </div>
         <div class="days">
-          <p class="date">{{ formatMonthDay(forecast.list[38].dt) }}</p>
-          <img :src="`https://openweathermap.org/img/wn/${forecast.list[38].weather[0].icon}@2x.png`" alt="Weather icon" class="-small-weather-icon">
-          <p class="s-min-max">{{ forecast?.list?.[38] ? Math.round(forecast.list[38].main.temp_max)+'°'+cOrf+' / '+Math.round(forecast.list[34].main.temp_min)+'°'+cOrf : $t('showcase.loading') }}</p>
+          <p class="date">{{ formatMonthDay(dayFive?.items?.[0]?.dt) }}</p>
+          <img :src="dayFive?.items?.[0]?.weather?.[0]?.icon ? getIconUrl(dayFive.items[0].weather[0].icon) : '../assets/loading.gif'" alt="Weather icon" class="-small-weather-icon">
+          <p class="s-min-max">{{ dayFive?.min?.length ? Math.round(dayFive.max[dayFive.max.length-1])+'°'+cOrf+' / '+Math.round(dayFive.min[0])+'°'+cOrf : $t('showcase.loading') }}</p>
         </div>
       </div>
       <div v-else class="row-five-loading">
@@ -69,165 +69,130 @@ import { storeToRefs } from 'pinia'
 import { useLocationStore } from '@/stores/location'
 import { useWeatherStore } from '@/stores/weather'
 import { useImageStore } from '@/stores/image'
+import { useLanguageStore } from '@/stores/language'
 
 const locationStore = useLocationStore()
 const { city } = storeToRefs(locationStore)
+const languageStore = useLanguageStore()
+const { formatMonthDay } = languageStore
 const weatherStore = useWeatherStore()
 const { weatherData } = storeToRefs(weatherStore)
 const { forecast } = storeToRefs(weatherStore)
 const imageStore = useImageStore()
 const { cityImage } = storeToRefs(imageStore)
+const { dayOne } = storeToRefs(weatherStore)
+const { dayTwo } = storeToRefs(weatherStore)
+const { dayThree } = storeToRefs(weatherStore)
+const { dayFour } = storeToRefs(weatherStore)
+const { dayFive } = storeToRefs(weatherStore)
+
+
+const standardMetric = ref("kph")
+const rainUnit = ref('mm')
+const celsius = ref(true)
 
 if (city.value === '') city.value = 'Miami'
 
-const searchQuery = ref('Miami')
-const apiKey = '46c9ee8f1274c2734c84066d7b4ffabe'
-const pexelsApiKey = 'CYJ2yN02aKa6NXFHENRS20ck9BV76yEJYQyWwiWaZt1wYBV1pv6sJfhE'
-const coordinates = ref(null)
-const forecastError = ref(null)
-const celsius = ref(true)
 const cOrf = ref('C')
 const fAndC = ref('F')
 
-function getFallbackImage(city) {
-  const seed = city.toLowerCase().replace(/\s+/g, '-') + '-' + Math.floor(Math.random() * 100)
-  return `https://picsum.photos/seed/${seed}/1920/1080`
+const localC = localStorage.getItem('celsius')
+if (localC === null) {
+  celsius.value = 'true'
+} else {
+  celsius.value = localC
 }
 
-// async function loadCityBackground(city) {
-//   if (!city?.trim()) return
-//   try {
-//     const query = `${city} skyline`.trim()
-//     const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=8&orientation=landscape`
-//     const response = await fetch(url, { headers: { Authorization: pexelsApiKey } })
-//     if (!response.ok) throw new Error(`Pexels failed: ${response.status}`)
-//     const data = await response.json()
-//     if (data.photos?.length > 0) {
-//       const randomIndex = Math.floor(Math.random() * data.photos.length)
-//       cityImage.value = data.photos[randomIndex].src.large2x
-//     } else {
-//       cityImage.value = getFallbackImage(city)
-//     }
-//   } catch (error) {
-//     console.error('Pexels image load error:', error)
-//     cityImage.value = getFallbackImage(city)
-//   }
-// }
-
-
-// async function fetchCoordinates() {
-//   const findie = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchQuery.value}&limit=1&appid=${apiKey}`)
-//   coordinates.value = await findie.json()
-//   console.log('Coordinates:', coordinates.value)
-// }
-
-// async function fetchWeather() {
-//   if (!location.value?.length) return
-//   const { lat, lon } = location.value[0]
-//   const lookUp = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`)
-//   weatherData.value = await lookUp.json()
-//   console.log("weather api loaded:", weatherData.value)
-// }
-
-// async function fetchFiveDay() {
-//   if (!coordinates.value?.[0]?.lat || !coordinates.value?.[0]?.lon) {
-//     console.warn("Coordinates not available for forecast fetch");
-//     forecastError.value = "Missing coordinates";
-//     return;
-//   }
-
-//   const  lat = coordinates.value[0].lat;
-//   const  lon = coordinates.value[0].lon;
-
-//   try {
-//     const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-    
-//     const response = await fetch(url);
-    
-//     if (!response.ok) {
-//       throw new Error(`Forecast API failed: ${response.status} ${response.statusText}`);
-//     }
-    
-//     const data = await response.json();
-//     forecast.value = data;
-//     console.log("5-day forecast loaded:", forecast.value);
-//   } catch (err) {
-//     forecastError.value = err.message || 'Failed to load 5-day forecast';
-//     console.error("Forecast error:", err);
-//   }
-// }
-
-// function capitalize(str = "") {
-//   return str.trim().split(/\s+/g).map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ")
-// }
-
+// This function turns not only Celsius to Fahrenheit but also kph to mph milimeters to inches
 function cToF() {
   if (!weatherData.value?.main) return
   const main = weatherData.value.main
-  console.log("forecast loaded", forecast)
+
   if (celsius.value) {
-    // °C to °F
+    // °C → °F
+    localStorage.setItem('celsius', true)
     main.temp = Math.round(main.temp * 1.8 + 32)
     main.feels_like = Math.round(main.feels_like * 1.8 + 32)
     main.temp_max = Math.round(main.temp_max * 1.8 + 32)
     main.temp_min = Math.round(main.temp_min * 1.8 + 32)
-    // forecast.value[2].main.temp_min = Math.round(forecast.value.list[2].main.temp_min * 1.8 + 32)
-    // forecast[6].main.temp_max = Math.round(forecast.list[6].main.temp_max * 1.8 + 32)
-    // forecast[10].main.temp_min = Math.round(forecast.list[10].main.temp_min * 1.8 + 32)
-    // forecast[14].main.temp_max = Math.round(forecast.list[14].main.temp_max * 1.8 + 32)
-    // forecast[18].main.temp_min = Math.round(forecast.list[18].main.temp_min * 1.8 + 32)
-    // forecast[22].main.temp_max = Math.round(forecast.list[22].main.temp_max * 1.8 + 32)
-    // forecast[26].main.temp_min = Math.round(forecast.list[26].main.temp_min * 1.8 + 32)
-    // forecast[30].main.temp_max = Math.round(forecast.list[30].main.temp_max * 1.8 + 32)
-    // forecast[34].main.temp_min = Math.round(forecast.list[34].main.temp_min * 1.8 + 32)
-    // forecast[38].main.temp_max = Math.round(forecast.list[38].main.temp_max * 1.8 + 32)
+    if (weatherData.value?.rain?.['1h']) {
+      weatherData.value.rain['1h'] = Math.round(weatherData.value.rain['1h'] / 25.4 * 100) / 100
+    }
+    if (weatherData.value?.snow?.['1h']) {
+      weatherData.value.snow['1h'] = Math.round(weatherData.value.snow['1h'] / 25.4 * 100) / 100
+    }
+    if (dayOne?.value?.min?.length) dayOne.value.min[0] = Math.round(dayOne.value.min[0] * 1.8 + 32)
+    if (dayOne?.value?.max?.length) dayOne.value.max[dayOne.value.max.length - 1] = Math.round(dayOne.value.max[dayOne.value.max.length - 1] * 1.8 + 32)
+    if (dayTwo?.value?.min?.length) dayTwo.value.min[0] = Math.round(dayTwo.value.min[0] * 1.8 + 32)
+    if (dayTwo?.value?.max?.length) dayTwo.value.max[dayTwo.value.max.length - 1] = Math.round(dayTwo.value.max[dayTwo.value.max.length - 1] * 1.8 + 32)
+    if (dayThree?.value?.min?.length) dayThree.value.min[0] = Math.round(dayThree.value.min[0] * 1.8 + 32)
+    if (dayThree?.value?.max?.length) dayThree.value.max[dayThree.value.max.length - 1] = Math.round(dayThree.value.max[dayThree.value.max.length - 1] * 1.8 + 32)
+    if (dayFour?.value?.min?.length) dayFour.value.min[0] = Math.round(dayFour.value.min[0] * 1.8 + 32)
+    if (dayFour?.value?.max?.length) dayFour.value.max[dayFour.value.max.length - 1] = Math.round(dayFour.value.max[dayFour.value.max.length - 1] * 1.8 + 32)
+    if (dayFive?.value?.min?.length) dayFive.value.min[0] = Math.round(dayFive.value.min[0] * 1.8 + 32)
+    if (dayFive?.value?.max?.length) dayFive.value.max[dayFive.value.max.length - 1] = Math.round(dayFive.value.max[dayFive.value.max.length - 1] * 1.8 + 32)
+    weatherData.value.wind.speed = Math.round(weatherData.value.wind.speed / 1.6)
+    standardMetric.value = "mph"
     cOrf.value = 'F'
     fAndC.value = 'C'
+    rainUnit.value = "in"
   } else {
-    // °F to °C
+    // °F → °C
+    localStorage.setItem('celsius', false)
     main.temp = Math.round((main.temp - 32) / 1.8)
     main.feels_like = Math.round((main.feels_like - 32) / 1.8)
     main.temp_max = Math.round((main.temp_max - 32) / 1.8)
     main.temp_min = Math.round((main.temp_min - 32) / 1.8)
-    // forecast.value[2].main.temp_min = Math.round((forecast.value[2].main.temp_min - 32) / 1.8)
-    // forecast.value[6].main.temp_max = Math.round((forecast.list[6].main.temp_max - 32) / 1.8)
-    // forecast.value[10].main.temp_min = Math.round((forecast.list[10].main.temp_min - 32) / 1.8)
-    // forecast.value[14].main.temp_max = Math.round((forecast.list[14].main.temp_max - 32) / 1.8)
-    // forecast.value[18].main.temp_min = Math.round((forecast.list[18].main.temp_min - 32) / 1.8)
-    // forecast.value[22].main.temp_max = Math.round((forecast.list[22].main.temp_max - 32) / 1.8)
-    // forecast.value[26].main.temp_min = Math.round((forecast.list[26].main.temp_min - 32) / 1.8)
-    // forecast.value[30].main.temp_max = Math.round((forecast.list[30].main.temp_max - 32) / 1.8)
-    // forecast.value[34].main.temp_min = Math.round((forecast.list[34].main.temp_min - 32) / 1.8)
-    // forecast.value[38].main.temp_max = Math.round((forecast.list[38].main.temp_max - 32) / 1.8)
+    if (weatherData.value?.rain?.['1h']) {
+      weatherData.value.rain['1h'] = Math.round(weatherData.value.rain['1h'] * 25.4)
+    }
+    if (weatherData.value?.snow?.['1h']) {
+      weatherData.value.snow['1h'] = Math.round(weatherData.value.snow['1h'] * 25.4)
+    }
+    if (dayOne?.value?.min?.length) dayOne.value.min[0] = Math.round((dayOne.value.min[0] - 32) / 1.8)
+    if (dayOne?.value?.max?.length) dayOne.value.max[dayOne.value.max.length - 1] = Math.round((dayOne.value.max[dayOne.value.max.length - 1] - 32) / 1.8)
+    if (dayTwo?.value?.min?.length) dayTwo.value.min[0] = Math.round((dayTwo.value.min[0] - 32) / 1.8)
+    if (dayTwo?.value?.max?.length) dayTwo.value.max[dayTwo.value.max.length - 1] = Math.round((dayTwo.value.max[dayTwo.value.max.length - 1] - 32) / 1.8)
+    if (dayThree?.value?.min?.length) dayThree.value.min[0] = Math.round((dayThree.value.min[0] - 32) / 1.8)
+    if (dayThree?.value?.max?.length) dayThree.value.max[dayThree.value.max.length - 1] = Math.round((dayThree.value.max[dayThree.value.max.length - 1] - 32) / 1.8)
+    if (dayFour?.value?.min?.length) dayFour.value.min[0] = Math.round((dayFour.value.min[0] - 32) / 1.8)
+    if (dayFour?.value?.max?.length) dayFour.value.max[dayFour.value.max.length - 1] = Math.round((dayFour.value.max[dayFour.value.max.length - 1] - 32) / 1.8)
+    if (dayFive?.value?.min?.length) dayFive.value.min[0] = Math.round((dayFive.value.min[0] - 32) / 1.8)
+    if (dayFive?.value?.max?.length) dayFive.value.max[dayFive.value.max.length - 1] = Math.round((dayFive.value.max[dayFive.value.max.length - 1] - 32) / 1.8)
+    weatherData.value.wind.speed = Math.round(weatherData.value.wind.speed * 1.6)
+    standardMetric.value = "kph"
     cOrf.value = 'C'
     fAndC.value = 'F'
+    rainUnit.value = "mm"
   }
   celsius.value = !celsius.value
 }
 
-function formatMonthDay(dt) {
-  if (!dt) return
+function formatHour(dt) {
+  if (!dt) return '';
   const date = new Date(dt * 1000);
-  return date.toLocaleDateString('en-US', {
-    month: 'numeric',
-    day: 'numeric'
+  return date.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
   });
-}
-
-async function handleSearch() {
-  // await loadCityBackground(searchQuery.value)
-  // await fetchCoordinates()
-  // await fetchWeather()
-  // await fetchFiveDay()
-  // searchQuery.value = capitalize(searchQuery.value)
 }
 
 function getIconUrl(icon) {
   return `https://openweathermap.org/img/wn/${icon}@2x.png`
 }
 
-handleSearch()
+function getWindDirection(deg) {
+  if (deg === undefined || deg === null) return '—';
 
+  deg = deg % 360;
+  if (deg < 0) deg += 360;
+
+  const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+  const index = Math.round(deg / 22.5) % 16;  // 22.5° per direction
+
+  return directions[index];
+}
 </script>
 
 <style>
@@ -250,6 +215,8 @@ handleSearch()
     flex-direction: column;
     justify-content: space-around;
     align-content: center;
+    min-height: 0;
+    overflow-y: auto;
   }
 
   .main-content > .sub-one {
@@ -310,6 +277,8 @@ handleSearch()
   .info {
     grid-template-rows: repeat(6, 1fr);
     grid-template-columns: 1fr;
+    flex-grow: 1;
+    padding-left: 50px;
   }
   .info > p {
     font-size: min(4vw, 20px);
@@ -360,8 +329,12 @@ handleSearch()
   }
 
   .days > p {
-    font-size: min(3vw, 16px);
+    font-size: min(2.5vw, 14px);
     margin: 0 auto;
+  }
+
+  .days :last-child {
+    margin-bottom: 5px;
   }
 
   .days > img {

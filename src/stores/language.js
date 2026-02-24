@@ -16,7 +16,19 @@ export const useLanguageStore = defineStore ( 'language', () => {
         locale.value = curLanguage.value
     }
 
-    return {curLanguage, toggleLanguage}
+    function formatMonthDay(dt) {
+    if (!dt) return ''
+
+    const timestamp = Number(dt) * 1000
+    const date = new Date(timestamp)
+
+    return date.toLocaleDateString(locale.value, {
+        month: 'numeric',
+        day: 'numeric'
+    })
+}
+
+    return {curLanguage, toggleLanguage, formatMonthDay}
     },
     {persist: true}
 )

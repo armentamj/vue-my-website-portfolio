@@ -55,8 +55,8 @@
           </div>
         </div>
         <div class="buttons">
-          <button class="button" @click="[prev(), handleAngle()]" :title="$t('about.prev')">{{ $t('about.prev') }}</button>
-          <button class="button" @click="[next(), handleAngle()]" :title="$t('about.next')">{{ $t('about.next') }}</button>
+          <button class="button" @click="prev()" :title="$t('about.prev')">{{ $t('about.prev') }}</button>
+          <button class="button" @click="next()" :title="$t('about.next')">{{ $t('about.next') }}</button>
         </div>
       </div>
     </div>
@@ -77,34 +77,6 @@ import { ref } from 'vue'
   const prev = () => {
     currentAngle.value += step   //Counter-clockwise rotation
     console.log(currentAngle)
-  }
-
-  const hobby1 = ref(null)
-  const hobby2 = ref(null)
-  const hobby3 = ref(null)
-  const hobby4 = ref(null)
-  const hobby5 = ref(null)
-
-  function handleAngle() {
-    // Remove 'turn' from all first (cleanup)
-    [hobby1, hobby2, hobby3, hobby4, hobby5].forEach(hobby => {
-      if (hobby.value.classList) {
-        hobby.value.classList.remove('turn')
-      }
-    })
-
-    // Add 'turn' to the matching one
-    if (currentAngle.value === 0) {
-      hobby1.value.classList.add('turn')
-    } else if (currentAngle.value === 72) {
-      hobby2.value.classList.add('turn')
-    } else if (currentAngle.value === 144) {
-      hobby3.value.classList.add('turn')
-    } else if (currentAngle.value === 216) {
-      hobby4.value.classList.add('turn')
-    } else if (currentAngle.value === 288) {
-      hobby5.value.classList.add('turn')
-    }
   }
 </script>
 
@@ -238,6 +210,7 @@ import { ref } from 'vue'
   backface-visibility: hidden;
   border: white solid 4px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .backface {

@@ -58,6 +58,8 @@
     justify-content: start;
     text-align: left;
     height: 90vh;
+    min-height: 0;
+    overflow-y: auto;
   }
 
   .home-info h1 {
@@ -103,6 +105,7 @@
   .ul-img {
     width: auto;
     height: clamp(60px, 80px, 80px);
+    justify-self: center;
   }
 
   .joel-pic img {
