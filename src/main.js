@@ -1,10 +1,20 @@
 import { createApp } from 'vue'
+
+// This is for Pinia
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
 import App from './App.vue'
+
+// This is to be able to have many views ie routes
 import router from './router'
 import './main.css'
+
+// This is for translations
 import { createI18n } from 'vue-i18n'
+
+// This is for SEO
+import { createHead } from '@vueuse/head'
 
 // Import your translation files
 import en from './locales/en.json'
@@ -38,6 +48,7 @@ const app = createApp(App)
 app.use(pinia)
 app.use(router)
 app.use(i18n)
+app.use(createHead())
 
 // Register Font Awesome icon component globally
 app.component('fa', FontAwesomeIcon)

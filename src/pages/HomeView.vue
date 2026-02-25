@@ -14,6 +14,7 @@
           <img src="../assets/ruby.svg" :alt="$t('home.ruby')" :title="$t('home.ruby')" class="ul-img ruby">
           <img src="../assets/rubyonrails.svg" :alt="$t('home.rails')" :title="$t('home.rails')" class="ul-img rails">
           <img src="../assets/logo-vue.svg" :alt="$t('home.vue')" :title="$t('home.vue')" class="ul-img vue">
+          <img src="../assets/vue_meta.svg" :alt="$t('home.vue_meta')" :title="$t('home.vue_meta')" class="ul-img vue_meta">
           <img src="../assets/brand-docker.svg" :alt="$t('home.docker')" :title="$t('home.docker')" class="ul-img docker">
           <img src="../assets/database-sql.svg" :alt="$t('home.sql')" :title="$t('home.sql')" class="ul-img sql">
           <img src="../assets/pinia-logo.svg" :alt="$t('home.pinia')" :title="$t('home.pinia')" class="ul-img pinia">
@@ -26,7 +27,19 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { useHead } from '@vueuse/head'  // This is needed for the SEO
+
+//  This is for the SEO of this page
+useHead({
+  title: 'Joel Armenta - Jr. Fullstack Web Developer',
+  meta: [
+    { name: 'description', content: 'Junior Fullstack Web Developer skilled in Ruby, Ruby on Rails, HTML, CSS, Sass, JavaScript, Vue, Pinia, SQL, i18n, VueMeta, Docker.' },
+    { name: 'keywords', content: 'vue, ruby, ruby on rails, html, css, sass, javascript, pinia, sql, i18n, vue-meta, docker, web developer' },
+    { property: 'og:title', content: 'Joel Armenta - Jr. Fullstack Web Developer' },
+    { property: 'og:description', content: 'Portfolio of a Jr. Fullstack Web Developer proficient in Ruby, Rails, Vue.js, and modern web development tools.' },
+  ],
+})
 </script>
 
 <style scoped>

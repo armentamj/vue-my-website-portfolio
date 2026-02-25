@@ -64,6 +64,7 @@
 </template>
 
 <script setup>
+import { useHead } from '@vueuse/head' // This is needed for the SEO
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useLocationStore } from '@/stores/location'
@@ -86,6 +87,16 @@ const { dayThree } = storeToRefs(weatherStore)
 const { dayFour } = storeToRefs(weatherStore)
 const { dayFive } = storeToRefs(weatherStore)
 
+// This is for SEO
+useHead({
+  title: 'Joel Armenta - Jr. Fullstack Web Developer',
+  meta: [
+    { name: 'description', content: 'Junior Fullstack Web Developer skilled in Ruby, Ruby on Rails, HTML, CSS, Sass, JavaScript, Vue, Pinia, SQL, i18n, VueMeta, Docker.' },
+    { name: 'keywords', content: 'vue, ruby, rails, html, css, sass, javascript, pinia, sql, i18n, vue-meta, docker, web developer' },
+    { property: 'og:title', content: 'Joel Armenta - Jr. Fullstack Web Developer' },
+    { property: 'og:description', content: 'Portfolio of a Jr. Fullstack Web Developer proficient in Ruby, Rails, Vue.js, and modern web development tools.' },
+  ],
+})
 
 const standardMetric = ref("kph")
 const rainUnit = ref('mm')

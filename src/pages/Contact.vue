@@ -14,7 +14,19 @@
     </div>
   </div>
 </template>
-<script>
+<script setup>
+import { useHead } from '@vueuse/head'  // This is needed for the SEO
+
+//  This is for the SEO of this page
+useHead({
+  title: 'Joel Armenta - Jr. Fullstack Web Developer',
+  meta: [
+    { name: 'description', content: 'Junior Fullstack Web Developer skilled in Ruby, Ruby on Rails, HTML, CSS, Sass, JavaScript, Vue, Pinia, SQL, i18n, VueMeta, Docker.' },
+    { name: 'keywords', content: 'vue, ruby, rails, html, css, sass, javascript, pinia, sql, i18n, vue-meta, docker, web developer' },
+    { property: 'og:title', content: 'Joel Armenta - Jr. Fullstack Web Developer' },
+    { property: 'og:description', content: 'Portfolio of a Jr. Fullstack Web Developer proficient in Ruby, Rails, Vue.js, and modern web development tools.' },
+  ],
+})
 </script>
 <style>
   .cntct-shwcs-main-sub > .p1 {

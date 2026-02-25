@@ -27,6 +27,7 @@
       "docker": "Docker – Software-Container-Manager",
       "sql": "SQL Programmiersprache",
       "pinia": "Pinia – globaler App-State-Manager",
+      "vue_meta": "vueMeta – ein Vue-Plugin für SEO",
       "garden": "Joel im Miami Beach Botanical Garden"
     },
     "showcase": {
