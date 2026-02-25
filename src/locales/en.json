@@ -28,6 +28,7 @@
       "sql": "SQL programming language",
       "pinia": "The Pinia Global App State Manager",
       "vue_meta": "vueMeta a Vue plug in for SEO",
+      "i18n":"Language internationalization",
       "garden": "Joel at Miami Beach Botanical Garden"
     },
     "showcase": {
