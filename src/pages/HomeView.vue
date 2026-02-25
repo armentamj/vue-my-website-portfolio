@@ -14,7 +14,7 @@
           <img src="../assets/ruby.svg" :alt="$t('home.ruby')" :title="$t('home.ruby')" class="ul-img ruby">
           <img src="../assets/rubyonrails.svg" :alt="$t('home.rails')" :title="$t('home.rails')" class="ul-img rails">
           <img src="../assets/logo-vue.svg" :alt="$t('home.vue')" :title="$t('home.vue')" class="ul-img vue">
-          <img src="../assets/vue_meta.svg" :alt="$t('home.vue_meta')" :title="$t('home.vue_meta')" class="ul-img vue_meta">
+          <img src="../assets/vueMeta.svg" :alt="$t('home.vue_meta')" :title="$t('home.vue_meta')" class="ul-img vue_meta">
           <img src="../assets/brand-docker.svg" :alt="$t('home.docker')" :title="$t('home.docker')" class="ul-img docker">
           <img src="../assets/database-sql.svg" :alt="$t('home.sql')" :title="$t('home.sql')" class="ul-img sql">
           <img src="../assets/pinia-logo.svg" :alt="$t('home.pinia')" :title="$t('home.pinia')" class="ul-img pinia">
