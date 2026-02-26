@@ -7,6 +7,9 @@ services:
     build: .
     hostname: homepage
     container_name: homepage
+    environment:
+      - OPENWEATHER_API_KEY
+      - PEXELS_API_KEY
     networks:
       - proxy
     restart: unless-stopped
