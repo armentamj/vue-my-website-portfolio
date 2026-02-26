@@ -67,7 +67,9 @@ export const useImageStore = defineStore('image', () => {
       const cityName = location.value[0].name.trim()
       const query = `${cityName} skyline`
 
-      const res = await fetch(`/pb/image/${encodeURIComponent(query)}`)
+      let baseUrl = ''
+      if (window.location.host.includes('localhost')) baseUrl = '/pb'
+      const res = await fetch(`${baseUrl}/image/${encodeURIComponent(query)}`)
 
       if (!res.ok) {
         throw new Error(`Image endpoint returned HTTP ${res.status}`)
