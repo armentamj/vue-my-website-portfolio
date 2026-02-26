@@ -10,6 +10,8 @@ services:
     environment:
       - OPENWEATHER_API_KEY
       - PEXELS_API_KEY
+      - UB_ADMIN_EMAIL
+      - UB_ADMIN_PASSWORD
     networks:
       - proxy
     restart: unless-stopped
