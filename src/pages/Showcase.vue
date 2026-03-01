@@ -21,7 +21,7 @@
           <p>{{ $t('showcase.precipitation') }}: {{ weatherData ? (weatherData.rain?.['1h'] ?? weatherData.snow?.['1h'] ?? 0) + ' ' + rainUnit : $t('showcase.loading') }}</p>
           <p>{{ $t('showcase.wind') }}: {{ weatherData ? $t(`directions.${getWindDirection(weatherData.wind.deg)}`) + ' / ' + Math.round(weatherData.wind.speed) + ' ' + standardMetric : $t('showcase.loading') }}</p>
           <p>{{ $t('showcase.hi_low') }}: {{weatherData?Math.round(weatherData.main.temp_max)+'°'+cOrf+' / '+Math.round(weatherData.main.temp_min)+'°'+cOrf:$t('showcase.loading')}}</p>
-          <p>{{ formatHour(weatherData.sys.sunrise) }} - {{ formatHour(weatherData.sys.sunset) }} UTC</p>
+          <p>{{ $t('showcase.sun') }}: {{ formatHour(weatherData.sys.sunrise) }}/{{ formatHour(weatherData.sys.sunset) }} UTC</p>
         </div>
       </div>
       <div class="row-five" v-if="forecast?.list?.length">

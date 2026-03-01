@@ -39,7 +39,8 @@
       "precipitation": "Precipitation",
       "wind": "Wind",
       "hi_low": "Hi/Low",
-      "feels_like": "Feels Like"
+      "feels_like": "Feels Like",
+      "sun": "Sun"
     },
     "contact": {
       "title": "Contact",
