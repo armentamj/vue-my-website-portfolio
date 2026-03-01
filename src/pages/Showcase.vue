@@ -107,13 +107,6 @@ if (city.value === '') city.value = 'Miami'
 const cOrf = ref('C')
 const fAndC = ref('F')
 
-const localC = localStorage.getItem('celsius')
-if (localC === null) {
-  celsius.value = 'true'
-} else {
-  celsius.value = localC
-}
-
 // This function turns not only Celsius to Fahrenheit but also kph to mph milimeters to inches
 function cToF() {
   if (!weatherData.value?.main) return
