@@ -98,9 +98,12 @@ useHead({
   ],
 })
 
+const maybe = ref('maybe')
 const standardMetric = ref("kph")
 const rainUnit = ref('mm')
 const celsius = ref(true)
+
+console.log(maybe.value)
 
 if (city.value === '') city.value = 'Miami'
 
