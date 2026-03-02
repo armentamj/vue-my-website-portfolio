@@ -19,6 +19,7 @@
           <img src="../assets/database-sql.svg" :alt="$t('home.sql')" :title="$t('home.sql')" class="ul-img sql">
           <img src="../assets/pinia-logo.svg" :alt="$t('home.pinia')" :title="$t('home.pinia')" class="ul-img pinia">
           <img src="../assets/i18n.svg" :alt="$t('home.i18n')" :title="$t('home.i18n')" class="ul-img i18n">
+          <img src="../assets/figma.svg" alt="Figma" title="Figma" class="ul-img figma">
         </div>
       </div>
       <div class="joel-pic main-sub">
