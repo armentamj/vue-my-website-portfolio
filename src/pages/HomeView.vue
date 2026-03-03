@@ -123,10 +123,6 @@ useHead({
     justify-self: center;
   }
 
-  .ul-word{
-
-  }
-
   .joel-pic img {
     width: 100%;
     height: 100%;

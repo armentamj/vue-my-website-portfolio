@@ -388,6 +388,10 @@ h1, h2, h3, h4, h5, h6, p, a {
     width: 100%;
   }
 
+  .main-content > .home-info {
+    height: fit-content;
+  }
+
   .home-info > h1 {
     font-size: 45px;
   }
@@ -408,6 +412,7 @@ h1, h2, h3, h4, h5, h6, p, a {
 
   .row-two > p {
     margin: 20px;
+    margin-bottom: 0;
   }
 
   .row-three > h2 {

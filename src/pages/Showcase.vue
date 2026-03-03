@@ -289,7 +289,7 @@ function getWindDirection(deg) {
   }
   .info > p {
     font-size: min(4vw, 20px);
-    margin: 10px 0;
+    margin: 8px 0;
   }
   .big-icon {
     width: fit-content;
