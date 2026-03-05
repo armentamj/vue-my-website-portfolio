@@ -26,9 +26,9 @@ pnpm-debug.log*
 pocketbase/pocketbase
 
 # PocketBase data & logs (never commit database or uploaded files)
-pb_data
-pb_public
-pb_logs
+pocketbase/pb_data
+pocketbase/pb_public
+pocketbase/pb_logs
 
 # Temporary / build artifacts
 .vite
