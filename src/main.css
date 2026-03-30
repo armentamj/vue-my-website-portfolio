@@ -1,18 +1,32 @@
- .currentMode, html,body {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-  }
+.currentMode, html,body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
 
 .currentMode {
   text-align: center;
 }
 
+p {
+  font-size: 1.48wh;
+}
+
+h1 {
+  font-size: 2.96vh;
+}
+
+h2 {
+  font-size: 2.22vh;
+}
+
+
+
 /* This is for all h1's to be a uniform size in all pages */
 h1 {
   font-weight: 400;
-  font-size: 70px;
+  font-size: 6.48vh;
 }
 
 /* This is to pass the font family to all h1-h6 and p tags */
@@ -416,7 +430,7 @@ h1, h2, h3, h4, h5, h6, p, a {
   }
 
   .row-three > h2 {
-    font-size: 40px;
+    font-size: 3.70vh;
     margin-bottom: 20px;
   }
 

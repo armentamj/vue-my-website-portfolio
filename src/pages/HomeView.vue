@@ -13,13 +13,14 @@
           <img src="../assets/logo-javascript.svg" :alt="$t('home.js')" :title="$t('home.js')" class="ul-img js">
           <img src="../assets/ruby.svg" :alt="$t('home.ruby')" :title="$t('home.ruby')" class="ul-img ruby">
           <img src="../assets/rubyonrails.svg" :alt="$t('home.rails')" :title="$t('home.rails')" class="ul-img rails">
+          <img src="../assets/tailwind.svg" :alt="$t('home.tailwind')" :title="$t('home.tailwind')" class="ul-img tailwind">
           <img src="../assets/logo-vue.svg" :alt="$t('home.vue')" :title="$t('home.vue')" class="ul-img vue">
           <img src="../assets/vueMeta.svg" :alt="$t('home.vue_meta')" :title="$t('home.vue_meta')" class="ul-img vue_meta">
           <img src="../assets/brand-docker.svg" :alt="$t('home.docker')" :title="$t('home.docker')" class="ul-img docker">
           <img src="../assets/database-sql.svg" :alt="$t('home.sql')" :title="$t('home.sql')" class="ul-img sql">
           <img src="../assets/pinia-logo.svg" :alt="$t('home.pinia')" :title="$t('home.pinia')" class="ul-img pinia">
           <img src="../assets/i18n.svg" :alt="$t('home.i18n')" :title="$t('home.i18n')" class="ul-img i18n">
-          <img src="../assets/figma.svg" alt="Figma" title="Figma" class="ul-img figma">
+          <img src="../assets/figma.svg" :alt="$t('home.figma')" :title="$t('home.figma')" class="ul-img figma">
         </div>
       </div>
       <div class="joel-pic main-sub">
@@ -90,7 +91,7 @@ useHead({
     font-family: "Yellowtail", cursive;
     font-weight: 300;
     font-style: normal;
-    font-size: 25px;
+    font-size: 2.31vh;
   }
 
   .home-info h2 {
@@ -102,8 +103,8 @@ useHead({
   }
 
   .p-intro {
-    margin-top: 10vh;
     margin-top: 0;
+    font-size: 1.48vh;
   }
 
   .home-ul {
@@ -119,7 +120,7 @@ useHead({
 
   .ul-img {
     width: auto;
-    height: clamp(60px, 80px, 80px);
+    height: 7.41vh;
     justify-self: center;
   }
 
