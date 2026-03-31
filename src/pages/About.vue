@@ -1,6 +1,7 @@
 <template>
   <div class="main-content">
-    <div class="cntct-shwcs-main-sub about-sub">
+  <a class="arvid" target="blank" href="https://ibb.co/bMpMT4pt">Hasi</a>
+    <div class="cntct-shwcs-main-sub about-sub hasi">
       <h1>{{ $t('about.h1') }}</h1>
       <h2 class="about-h2">{{ $t('about.h2one') }}</h2>
       <div class="grid">
@@ -39,7 +40,7 @@
             <div class="flip-inner">
               <img class="front" src="../assets/video-game-rage.gif" :alt="$t('about.video_games_alt')" :title="$t('about.video_games_title')">
               <p class="backface">{{ $t('about.video_games_backface') }}</p>
-            </div>
+            </div>s
           </div>
           <div class="hobby-card4 hobbies-cards" ref="hobby4">
             <div class="flip-inner">
@@ -95,6 +96,22 @@ useHead({
 </script>
 
 <style>
+.arvid {
+  position: absolute;
+  top: 1000px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  font: bold;
+  font-size: 50px;
+}
+
+.hasi {
+  position: relative;
+  z-index: 2;
+  visibility: visible;
+}
+
 .main-content > .about-sub {
   height: fit-content;
   box-sizing: border-box;
@@ -117,7 +134,6 @@ useHead({
 .cards {
   border-radius: 6px;
   box-sizing: border-box;
-  cursor: pointer;
 }
 
 .card1 {
@@ -132,6 +148,7 @@ useHead({
 .card4 {
   grid-area: cardfour;
 }
+
 .card5 {
   grid-area: cardfive;
 }
@@ -146,10 +163,6 @@ useHead({
 
 }
 
-.cards > img:hover {
-  transform: scale(1.2);
-  transition: transform ease-out 0.8s;
-}
 
 .carousels-container {
   margin: 40px auto;
